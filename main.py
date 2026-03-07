@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-client = AsyncIOMotorClient("mongodb+srv://gymate_test:gymate123@gymate-cluster.sajixbd.mongodb.net/gymate?appName=GyMate-cluster")
+client = AsyncIOMotorClient("MONGO_URI")
 db = client.gymate
 
 users    = db.users
