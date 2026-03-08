@@ -130,7 +130,7 @@ function Onboarding({ onComplete }) {
 
       <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:20, padding:"40px 44px", width:"100%", maxWidth:460, position:"relative", zIndex:1, boxShadow:`0 0 60px rgba(250,70,22,0.12)`, animation:"fadeUp 0.4s ease" }}>
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:28 }}>
-          <div style={{ width:42, height:42, borderRadius:10, background:`linear-gradient(135deg,${C.orange},${C.orangeDim})`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Bebas Neue',sans-serif", fontSize:18, color:C.white, letterSpacing:1 }}>GM</div>
+          <img src="/GyMate_logo.png" style={{ width:80, height:80, borderRadius:10, objectFit:"contain" }} alt="GyMate"/>
           <div>
             <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:22, letterSpacing:3, color:C.white }}>GY<span style={{ color:C.orange }}>MATE</span></div>
             <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:2 }}>UNIVERSITY OF FLORIDA</div>
@@ -368,7 +368,7 @@ export default function GyMateDashboard() {
         {/* ── Nav ── */}
         <nav style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"14px 28px", borderBottom:`1px solid ${C.border}`, background:C.surface, position:"sticky", top:0, zIndex:50 }}>
           <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-            <div style={{ width:34, height:34, background:`linear-gradient(135deg,${C.orange},${C.orangeDim})`, borderRadius:8, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Bebas Neue',sans-serif", fontSize:15, color:C.white, letterSpacing:1 }}>GM</div>
+            <img src="/GyMate_logo.png" style={{ width:80, height:80, borderRadius:8, objectFit:"contain" }} alt="GyMate"/>
             <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:20, letterSpacing:2 }}>GY<span style={{ color:C.orange }}>MATE</span></span>
             <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:2, marginLeft:4, paddingLeft:12, borderLeft:`1px solid ${C.border}` }}>UNIVERSITY OF FLORIDA</span>
           </div>
