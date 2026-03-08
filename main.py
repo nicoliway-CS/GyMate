@@ -4,6 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
+from datetime import datetime
 
 load_dotenv()
 
@@ -11,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-client = AsyncIOMotorClient("MONGO_URI")
+client = AsyncIOMotorClient(os.getenv("MONGO_URI"))
 db = client.gymate
 
 users    = db.users
@@ -45,3 +46,34 @@ async def get_user(email: str):
 async def test():
     collections = await db.list_collection_names()
     return {"status": "connected", "collections": collections}
+
+
+class Session(BaseModel):
+    email: str
+    exercise: str
+    good_reps: int
+    bad_reps: int
+    total_sets: int
+
+@app.post("/sessions")
+async def create_session(session: Session):
+    # find the user by email to link the session
+    user = await users.find_one({"email": session.email})
+    user_id = str(user["_id"]) if user else None
+
+    data = {
+        **session.dict(),
+        "user_id": user_id,
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+    result = await sessions.insert_one(data)
+    return {"status": "created", "id": str(result.inserted_id)}
+
+@app.get("/sessions/{email}")
+async def get_sessions(email: str):
+    cursor = sessions.find({"email": email})
+    result = []
+    async for s in cursor:
+        result.append({**s, "_id": str(s["_id"])})
+    return result

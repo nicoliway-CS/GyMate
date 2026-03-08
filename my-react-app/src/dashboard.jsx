@@ -29,57 +29,6 @@ const C = {
 
 const EXERCISES = ["Bench Press", "Squat", "Deadlift", "OHP", "Barbell Row", "Curl"];
 
-const mockLeaderboards = {
-  "Bench Press": [
-    { rank:1, name:"Jordan M.", score:96, weight:"225 lbs", delta:"+2" },
-    { rank:2, name:"Priya S.",  score:94, weight:"185 lbs", delta:"+1" },
-    { rank:3, name:"Tyler R.",  score:91, weight:"205 lbs", delta:"-1" },
-    { rank:4, name:"Alex C.",   score:88, weight:"175 lbs", delta:"+3", isUser:true },
-    { rank:5, name:"Sam K.",    score:85, weight:"195 lbs", delta:"0"  },
-    { rank:6, name:"Dana L.",   score:83, weight:"165 lbs", delta:"-2" },
-  ],
-  "Squat": [
-    { rank:1, name:"Marcus T.", score:98, weight:"315 lbs", delta:"+1" },
-    { rank:2, name:"Alex C.",   score:93, weight:"275 lbs", delta:"+2", isUser:true },
-    { rank:3, name:"Priya S.",  score:90, weight:"225 lbs", delta:"0"  },
-    { rank:4, name:"Jordan M.", score:87, weight:"295 lbs", delta:"-1" },
-    { rank:5, name:"Riley B.",  score:84, weight:"245 lbs", delta:"+1" },
-  ],
-  "Deadlift": [
-    { rank:1, name:"Tyler R.",  score:97, weight:"405 lbs", delta:"0"  },
-    { rank:2, name:"Sam K.",    score:92, weight:"365 lbs", delta:"+2" },
-    { rank:3, name:"Alex C.",   score:89, weight:"315 lbs", delta:"-1", isUser:true },
-    { rank:4, name:"Marcus T.", score:86, weight:"385 lbs", delta:"+1" },
-  ],
-  "OHP": [
-    { rank:1, name:"Alex C.",   score:91, weight:"135 lbs", delta:"+4", isUser:true },
-    { rank:2, name:"Dana L.",   score:88, weight:"115 lbs", delta:"+1" },
-    { rank:3, name:"Riley B.",  score:85, weight:"125 lbs", delta:"-1" },
-    { rank:4, name:"Priya S.",  score:82, weight:"95 lbs",  delta:"0"  },
-  ],
-  "Barbell Row": [
-    { rank:1, name:"Sam K.",    score:94, weight:"225 lbs", delta:"+1" },
-    { rank:2, name:"Jordan M.", score:90, weight:"205 lbs", delta:"0"  },
-    { rank:3, name:"Alex C.",   score:84, weight:"185 lbs", delta:"+2", isUser:true },
-  ],
-  "Curl": [
-    { rank:1, name:"Dana L.",   score:93, weight:"55 lbs",  delta:"+3" },
-    { rank:2, name:"Riley B.",  score:88, weight:"50 lbs",  delta:"+1" },
-    { rank:3, name:"Alex C.",   score:82, weight:"45 lbs",  delta:"0",  isUser:true },
-    { rank:4, name:"Priya S.",  score:79, weight:"40 lbs",  delta:"-1" },
-  ],
-};
-
-const mostActiveLeaderboard = [
-  { rank:1, name:"Marcus T.", sessions:52, streak:14, totalReps:1840 },
-  { rank:2, name:"Priya S.",  sessions:47, streak:10, totalReps:1620 },
-  { rank:3, name:"Sam K.",    sessions:44, streak:9,  totalReps:1510 },
-  { rank:4, name:"Alex C.",   sessions:38, streak:7,  totalReps:1290, isUser:true },
-  { rank:5, name:"Tyler R.",  sessions:35, streak:5,  totalReps:1180 },
-  { rank:6, name:"Jordan M.", sessions:31, streak:4,  totalReps:1040 },
-  { rank:7, name:"Dana L.",   sessions:28, streak:3,  totalReps:960  },
-];
-
 const mockRepData = [
   { rep:1, quality:88 }, { rep:2, quality:91 }, { rep:3, quality:85 },
   { rep:4, quality:80 }, { rep:5, quality:77 }, { rep:6, quality:72 },
@@ -89,13 +38,6 @@ const mockRepData = [
 const mockWeekly = [
   { day:"MON", score:74 }, { day:"TUE", score:81 }, { day:"WED", score:0  },
   { day:"THU", score:88 }, { day:"FRI", score:76 }, { day:"SAT", score:92 }, { day:"SUN", score:0 },
-];
-
-const mockHistory = [
-  { date:"Mar 6",  exercise:"Bench Press", score:88, reps:32, duration:"42min", weight:"175 lbs" },
-  { date:"Mar 4",  exercise:"Squat",       score:76, reps:24, duration:"38min", weight:"275 lbs" },
-  { date:"Mar 2",  exercise:"Deadlift",    score:91, reps:18, duration:"30min", weight:"315 lbs" },
-  { date:"Feb 29", exercise:"OHP",         score:72, reps:27, duration:"35min", weight:"135 lbs" },
 ];
 
 // ── Tooltip ──────────────────────────────────────────────────────────────────
@@ -187,8 +129,6 @@ function Onboarding({ onComplete }) {
       <div style={{ position:"absolute", bottom:"-15%", right:"-10%", width:500, height:500, borderRadius:"50%", background:C.blueGlow, filter:"blur(80px)", pointerEvents:"none" }}/>
 
       <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:20, padding:"40px 44px", width:"100%", maxWidth:460, position:"relative", zIndex:1, boxShadow:`0 0 60px rgba(250,70,22,0.12)`, animation:"fadeUp 0.4s ease" }}>
-
-        {/* Logo */}
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:28 }}>
           <div style={{ width:42, height:42, borderRadius:10, background:`linear-gradient(135deg,${C.orange},${C.orangeDim})`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Bebas Neue',sans-serif", fontSize:18, color:C.white, letterSpacing:1 }}>GM</div>
           <div>
@@ -197,7 +137,6 @@ function Onboarding({ onComplete }) {
           </div>
         </div>
 
-        {/* Progress */}
         <div style={{ display:"flex", gap:6, marginBottom:28 }}>
           {[0,1].map(i => (
             <div key={i} style={{ flex:1, height:3, borderRadius:2, background:i<=step?C.orange:C.border, transition:"background 0.3s" }}/>
@@ -254,6 +193,75 @@ function Onboarding({ onComplete }) {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
+const BACKEND    = "http://127.0.0.1:8000";
+const USER_EMAIL = "nicolasliwayaven@ufl.edu";
+// Exercise keys that match what the Pi sends
+const PI_EXERCISES = ["Squat", "Bench", "Lat Pull-Dwn"];
+
+// Build leaderboards with dynamic user name
+function buildLeaderboards(userName) {
+  const u = userName || "You";
+  // abbreviate to First L. format
+  const parts = u.trim().split(" ");
+  const short  = parts.length > 1 ? `${parts[0]} ${parts[parts.length-1][0]}.` : parts[0];
+
+  return {
+    "Bench Press": [
+      { rank:1, name:"Jordan M.", score:96, weight:"225 lbs", delta:"+2" },
+      { rank:2, name:"Priya S.",  score:94, weight:"185 lbs", delta:"+1" },
+      { rank:3, name:"Tyler R.",  score:91, weight:"205 lbs", delta:"-1" },
+      { rank:4, name:short,       score:88, weight:"175 lbs", delta:"+3", isUser:true },
+      { rank:5, name:"Sam K.",    score:85, weight:"195 lbs", delta:"0"  },
+      { rank:6, name:"Dana L.",   score:83, weight:"165 lbs", delta:"-2" },
+    ],
+    "Squat": [
+      { rank:1, name:"Marcus T.", score:98, weight:"315 lbs", delta:"+1" },
+      { rank:2, name:short,       score:93, weight:"275 lbs", delta:"+2", isUser:true },
+      { rank:3, name:"Priya S.",  score:90, weight:"225 lbs", delta:"0"  },
+      { rank:4, name:"Jordan M.", score:87, weight:"295 lbs", delta:"-1" },
+      { rank:5, name:"Riley B.",  score:84, weight:"245 lbs", delta:"+1" },
+    ],
+    "Deadlift": [
+      { rank:1, name:"Tyler R.",  score:97, weight:"405 lbs", delta:"0"  },
+      { rank:2, name:"Sam K.",    score:92, weight:"365 lbs", delta:"+2" },
+      { rank:3, name:short,       score:89, weight:"315 lbs", delta:"-1", isUser:true },
+      { rank:4, name:"Marcus T.", score:86, weight:"385 lbs", delta:"+1" },
+    ],
+    "OHP": [
+      { rank:1, name:short,       score:91, weight:"135 lbs", delta:"+4", isUser:true },
+      { rank:2, name:"Dana L.",   score:88, weight:"115 lbs", delta:"+1" },
+      { rank:3, name:"Riley B.",  score:85, weight:"125 lbs", delta:"-1" },
+      { rank:4, name:"Priya S.",  score:82, weight:"95 lbs",  delta:"0"  },
+    ],
+    "Barbell Row": [
+      { rank:1, name:"Sam K.",    score:94, weight:"225 lbs", delta:"+1" },
+      { rank:2, name:"Jordan M.", score:90, weight:"205 lbs", delta:"0"  },
+      { rank:3, name:short,       score:84, weight:"185 lbs", delta:"+2", isUser:true },
+    ],
+    "Curl": [
+      { rank:1, name:"Dana L.",   score:93, weight:"55 lbs",  delta:"+3" },
+      { rank:2, name:"Riley B.",  score:88, weight:"50 lbs",  delta:"+1" },
+      { rank:3, name:short,       score:82, weight:"45 lbs",  delta:"0",  isUser:true },
+      { rank:4, name:"Priya S.",  score:79, weight:"40 lbs",  delta:"-1" },
+    ],
+  };
+}
+
+function buildMostActive(userName) {
+  const u = userName || "You";
+  const parts = u.trim().split(" ");
+  const short  = parts.length > 1 ? `${parts[0]} ${parts[parts.length-1][0]}.` : parts[0];
+  return [
+    { rank:1, name:"Marcus T.", sessions:52, streak:14, totalReps:1840 },
+    { rank:2, name:"Priya S.",  sessions:47, streak:10, totalReps:1620 },
+    { rank:3, name:"Sam K.",    sessions:44, streak:9,  totalReps:1510 },
+    { rank:4, name:short,       sessions:38, streak:7,  totalReps:1290, isUser:true },
+    { rank:5, name:"Tyler R.",  sessions:35, streak:5,  totalReps:1180 },
+    { rank:6, name:"Jordan M.", sessions:31, streak:4,  totalReps:1040 },
+    { rank:7, name:"Dana L.",   sessions:28, streak:3,  totalReps:960  },
+  ];
+}
+
 export default function GyMateDashboard() {
   const [user, setUser] = useState(null);
   const [showOnboarding, setShowOnboarding] = useState(true);
@@ -262,13 +270,14 @@ export default function GyMateDashboard() {
     const cached = localStorage.getItem("gymate_user");
     if (cached) {
       const parsed = JSON.parse(cached);
-      fetch(`http://127.0.0.1:8000/users/${parsed.email}`)
+      fetch(`${BACKEND}/users/${parsed.email}`)
         .then(r => r.json())
         .then(data => {
           if (data) { setUser(data); setShowOnboarding(false); }
         });
     }
   }, []);
+
   const [tab, setTab] = useState("dashboard");
   const [lbEx, setLbEx] = useState("Bench Press");
 
@@ -281,6 +290,34 @@ export default function GyMateDashboard() {
   const [setWeight, setSetWeight] = useState("");
   const [setRepsVal, setSetRepsVal] = useState("");
   const liveRef = useRef(null);
+
+  // ── Last session from backend ─────────────────────────────────────────────
+  const [lastSession, setLastSession] = useState(null);
+
+  useEffect(() => {
+    fetch(`${BACKEND}/sessions/${USER_EMAIL}`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const sorted = [...data].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+          setLastSession(sorted[0]);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // ── Real session data from backend ───────────────────────────────────────
+  const [sessionData, setSessionData] = useState([]);
+  const [loadingSessions, setLoadingSessions] = useState(false);
+
+  useEffect(() => {
+    if (tab !== "history") return;
+    setLoadingSessions(true);
+    fetch(`${BACKEND}/sessions/${USER_EMAIL}`)
+      .then(r => r.json())
+      .then(data => { setSessionData(Array.isArray(data) ? data : []); setLoadingSessions(false); })
+      .catch(() => { setSessionData([]); setLoadingSessions(false); });
+  }, [tab]);
 
   useEffect(() => {
     if (liveOn) {
@@ -301,6 +338,10 @@ export default function GyMateDashboard() {
   };
 
   const TABS = ["dashboard","session","leaderboard","history"];
+
+  // build leaderboards dynamically using real user name
+  const mockLeaderboards    = buildLeaderboards(user?.name);
+  const mostActiveLeaderboard = buildMostActive(user?.name);
 
   return (
     <>
@@ -353,22 +394,8 @@ export default function GyMateDashboard() {
                 {(user.name||"A").split(" ").map(n=>n[0]).join("").slice(0,2)}
               </div>
               <button
-                onClick={() => {
-                  localStorage.removeItem("gymate_user");
-                  setUser(null);
-                  setShowOnboarding(true);
-                }}
-                style={{
-                  background:"transparent",
-                  border:`1px solid ${C.border}`,
-                  borderRadius:8,
-                  padding:"6px 12px",
-                  color:C.textMuted,
-                  fontFamily:"'JetBrains Mono',monospace",
-                  fontSize:9,
-                  letterSpacing:1,
-                  cursor:"pointer",
-                }}
+                onClick={() => { localStorage.removeItem("gymate_user"); setUser(null); setShowOnboarding(true); }}
+                style={{ background:"transparent", border:`1px solid ${C.border}`, borderRadius:8, padding:"6px 12px", color:C.textMuted, fontFamily:"'JetBrains Mono',monospace", fontSize:9, letterSpacing:1, cursor:"pointer" }}
               >SIGN OUT</button>
             </>}
           </div>
@@ -380,23 +407,32 @@ export default function GyMateDashboard() {
           {/* ════════ DASHBOARD ════════ */}
           {tab==="dashboard" && (
             <div style={{ display:"flex", flexDirection:"column", gap:20, animation:"fadeUp 0.4s ease" }}>
-
               <div style={{ display:"flex", gap:20, flexWrap:"wrap" }}>
-                {/* Hero */}
                 <div style={{ flex:2, minWidth:280, background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:16, padding:"26px 28px", display:"flex", alignItems:"center", gap:24, position:"relative", overflow:"hidden" }}>
                   <div style={{ position:"absolute", top:-40, right:-40, width:220, height:220, borderRadius:"50%", background:C.orangeGlow, filter:"blur(50px)" }}/>
-                  <ScoreRing score={88}/>
+                  <ScoreRing score={lastSession ? Math.round((lastSession.good_reps / Math.max(lastSession.good_reps + lastSession.bad_reps, 1)) * 100) : 0}/>
                   <div style={{ zIndex:1 }}>
-                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.orange, letterSpacing:2, marginBottom:8 }}>LAST SESSION · MAR 6</div>
-                    <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:32, letterSpacing:2, lineHeight:1 }}>Bench Press</div>
-                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:C.textMuted, marginTop:6 }}>175 lbs · 8 reps · 42 min</div>
-                    <div style={{ marginTop:14, display:"inline-flex", alignItems:"center", gap:6, background:C.orangeGlow, border:`1px solid ${C.orange}`, borderRadius:20, padding:"4px 12px" }}>
-                      <span>🔥</span>
-                      <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.orange, fontWeight:700 }}>7 DAY STREAK</span>
-                    </div>
+                    {lastSession ? <>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.orange, letterSpacing:2, marginBottom:8 }}>
+                        LAST SESSION · {new Date(lastSession.timestamp).toLocaleDateString("en-US",{month:"short",day:"numeric"}).toUpperCase()}
+                      </div>
+                      <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:32, letterSpacing:2, lineHeight:1 }}>{lastSession.exercise}</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:C.textMuted, marginTop:6 }}>
+                        {lastSession.total_sets} sets · {lastSession.good_reps + lastSession.bad_reps} reps · {lastSession.good_reps} good / {lastSession.bad_reps} bad
+                      </div>
+                      <div style={{ marginTop:14, display:"inline-flex", alignItems:"center", gap:6, background:C.orangeGlow, border:`1px solid ${C.orange}`, borderRadius:20, padding:"4px 12px" }}>
+                        <span>✅</span>
+                        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.orange, fontWeight:700 }}>
+                          {Math.round((lastSession.good_reps / Math.max(lastSession.good_reps + lastSession.bad_reps, 1)) * 100)}% GOOD REPS
+                        </span>
+                      </div>
+                    </> : <>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textMuted, letterSpacing:2, marginBottom:8 }}>NO SESSIONS YET</div>
+                      <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:28, letterSpacing:2, lineHeight:1, color:C.textMuted }}>Complete a workout</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:C.textMuted, marginTop:6 }}>on the wristband to see data here</div>
+                    </>}
                   </div>
                 </div>
-                {/* Stats */}
                 <div style={{ flex:1, minWidth:200, background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px", display:"flex", flexDirection:"column", gap:10 }}>
                   <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:2, marginBottom:2 }}>YOUR PROFILE</div>
                   <div style={{ display:"flex", gap:8 }}><StatBox label="Rank" value="#4" hi/><StatBox label="Sessions" value="38"/></div>
@@ -404,7 +440,6 @@ export default function GyMateDashboard() {
                 </div>
               </div>
 
-              {/* Charts */}
               <div style={{ display:"flex", gap:20, flexWrap:"wrap" }}>
                 <div style={{ flex:3, minWidth:300, background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 24px" }}>
                   <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:18 }}>
@@ -442,7 +477,6 @@ export default function GyMateDashboard() {
                 </div>
               </div>
 
-              {/* Most Active leaderboard on dashboard */}
               <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"22px 24px" }}>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
                   <div>
@@ -480,8 +514,6 @@ export default function GyMateDashboard() {
           {tab==="session" && (
             <div style={{ display:"flex", flexDirection:"column", gap:20, animation:"fadeUp 0.4s ease" }}>
               <div style={{ display:"flex", gap:20, flexWrap:"wrap" }}>
-
-                {/* Live counter */}
                 <div style={{ flex:1, minWidth:280, background:C.card, border:`1px solid ${liveOn?C.orange:C.border}`, borderRadius:16, padding:"28px", display:"flex", flexDirection:"column", alignItems:"center", gap:20, boxShadow:liveOn?`0 0 40px ${C.orangeGlow}`:"none", transition:"all 0.3s" }}>
                   <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textMuted, letterSpacing:2, display:"flex", alignItems:"center", gap:6 }}>
                     {liveOn && <div style={{ width:6, height:6, borderRadius:"50%", background:C.orange, animation:"blink 1s infinite" }}/>}
@@ -498,9 +530,7 @@ export default function GyMateDashboard() {
                   <button onClick={()=>setLiveOn(v=>!v)} style={{ width:"100%", padding:"14px", borderRadius:12, border:"none", cursor:"pointer", background:liveOn?C.red:C.orange, color:C.white, fontFamily:"'Bebas Neue',sans-serif", fontSize:17, letterSpacing:2, boxShadow:liveOn?`0 4px 20px rgba(255,77,109,0.4)`:`0 4px 20px rgba(250,70,22,0.35)`, transition:"all 0.2s" }}>{liveOn?"⏹ STOP SESSION":"⚡ START SESSION"}</button>
                 </div>
 
-                {/* Right panel */}
                 <div style={{ flex:1.4, minWidth:300, display:"flex", flexDirection:"column", gap:16 }}>
-                  {/* Exercise */}
                   <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px" }}>
                     <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:2, marginBottom:12 }}>SELECT EXERCISE</div>
                     <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
@@ -510,18 +540,15 @@ export default function GyMateDashboard() {
                     </div>
                   </div>
 
-                  {/* Set logger */}
                   <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px", flex:1 }}>
                     <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:2, marginBottom:12 }}>LOG A SET — {selEx.toUpperCase()}</div>
                     <div style={{ display:"flex", gap:8, marginBottom:12 }}>
-                      {/* Weight input */}
                       <div style={{ flex:1, position:"relative" }}>
                         <input type="number" placeholder="Weight" value={setWeight} onChange={e=>setSetWeight(e.target.value)}
                           style={{ width:"100%", background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, padding:"10px 44px 10px 12px", color:C.text, fontFamily:"'DM Sans',sans-serif", fontSize:13, outline:"none" }}
                           onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>
                         <span style={{ position:"absolute", right:10, top:"50%", transform:"translateY(-50%)", fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted }}>lbs</span>
                       </div>
-                      {/* Reps input */}
                       <div style={{ flex:1, position:"relative" }}>
                         <input type="number" placeholder="Reps" value={setRepsVal} onChange={e=>setSetRepsVal(e.target.value)}
                           style={{ width:"100%", background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, padding:"10px 44px 10px 12px", color:C.text, fontFamily:"'DM Sans',sans-serif", fontSize:13, outline:"none" }}
@@ -530,7 +557,6 @@ export default function GyMateDashboard() {
                       </div>
                       <button onClick={addSet} style={{ background:C.orange, border:"none", borderRadius:8, padding:"10px 16px", color:C.white, fontFamily:"'Bebas Neue',sans-serif", fontSize:15, letterSpacing:1, cursor:"pointer" }}>ADD</button>
                     </div>
-
                     {sets.length===0
                       ? <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textDim, textAlign:"center", padding:"16px 0" }}>No sets logged — enter weight &amp; reps above</div>
                       : <div style={{ display:"flex", flexDirection:"column", gap:6, maxHeight:180, overflowY:"auto" }}>
@@ -548,7 +574,6 @@ export default function GyMateDashboard() {
                 </div>
               </div>
 
-              {/* Rep timeline */}
               <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 24px" }}>
                 <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>Rep Timeline — Last Session</div>
                 <div style={{ display:"flex", gap:8, alignItems:"flex-end", height:80 }}>
@@ -574,8 +599,6 @@ export default function GyMateDashboard() {
           {/* ════════ LEADERBOARD ════════ */}
           {tab==="leaderboard" && (
             <div style={{ display:"flex", flexDirection:"column", gap:20, animation:"fadeUp 0.4s ease" }}>
-
-              {/* Header */}
               <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:16, padding:"24px 26px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                 <div>
                   <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:28, letterSpacing:2 }}>🏆 UF Leaderboards</div>
@@ -587,21 +610,17 @@ export default function GyMateDashboard() {
                 </div>
               </div>
 
-              {/* Exercise pill tabs */}
               <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
                 {EXERCISES.map(ex=>(
                   <button key={ex} className="lb-pill" onClick={()=>setLbEx(ex)} style={{
-                    background:lbEx===ex?C.orange:C.card,
-                    border:`1px solid ${lbEx===ex?C.orange:C.border}`,
+                    background:lbEx===ex?C.orange:C.card, border:`1px solid ${lbEx===ex?C.orange:C.border}`,
                     borderRadius:20, padding:"8px 18px", cursor:"pointer",
                     color:lbEx===ex?C.white:C.textMuted,
-                    fontFamily:"'DM Sans',sans-serif", fontWeight:600, fontSize:13,
-                    transition:"all 0.15s",
+                    fontFamily:"'DM Sans',sans-serif", fontWeight:600, fontSize:13, transition:"all 0.15s",
                   }}>{ex}</button>
                 ))}
               </div>
 
-              {/* Per-exercise table */}
               <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 24px" }}>
                 <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:20, letterSpacing:2, marginBottom:14, color:C.orange }}>{lbEx}</div>
                 <div style={{ display:"grid", gridTemplateColumns:"44px 1fr 120px 70px 50px", gap:14, padding:"0 12px", marginBottom:8 }}>
@@ -613,10 +632,8 @@ export default function GyMateDashboard() {
                   <div key={i} className="row-h" style={{
                     display:"grid", gridTemplateColumns:"44px 1fr 120px 70px 50px", gap:14,
                     padding:"13px 12px", borderRadius:12, marginBottom:6,
-                    background:e.isUser?C.orangeGlow:C.surface,
-                    border:`1px solid ${e.isUser?C.orange:C.border}`,
-                    alignItems:"center", transition:"background 0.15s",
-                    animation:`fadeUp 0.3s ease ${i*0.06}s both`,
+                    background:e.isUser?C.orangeGlow:C.surface, border:`1px solid ${e.isUser?C.orange:C.border}`,
+                    alignItems:"center", transition:"background 0.15s", animation:`fadeUp 0.3s ease ${i*0.06}s both`,
                   }}>
                     <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, letterSpacing:1, color:e.rank===1?"#ffd700":e.rank===2?"#c0c0c0":e.rank===3?"#cd7f32":C.textMuted }}>
                       {e.rank===1?"🥇":e.rank===2?"🥈":e.rank===3?"🥉":`#${e.rank}`}
@@ -632,7 +649,6 @@ export default function GyMateDashboard() {
                 ))}
               </div>
 
-              {/* Full Most Active */}
               <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 24px" }}>
                 <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:20, letterSpacing:2, marginBottom:14 }}>🏃 Most Active — All Time</div>
                 <div style={{ display:"grid", gridTemplateColumns:"44px 1fr 90px 80px 110px", gap:14, padding:"0 12px", marginBottom:8 }}>
@@ -644,10 +660,8 @@ export default function GyMateDashboard() {
                   <div key={i} className="row-h" style={{
                     display:"grid", gridTemplateColumns:"44px 1fr 90px 80px 110px", gap:14,
                     padding:"12px 12px", borderRadius:12, marginBottom:6,
-                    background:e.isUser?C.orangeGlow:C.surface,
-                    border:`1px solid ${e.isUser?C.orange:C.border}`,
-                    alignItems:"center", transition:"background 0.15s",
-                    animation:`fadeUp 0.3s ease ${i*0.05}s both`,
+                    background:e.isUser?C.orangeGlow:C.surface, border:`1px solid ${e.isUser?C.orange:C.border}`,
+                    alignItems:"center", transition:"background 0.15s", animation:`fadeUp 0.3s ease ${i*0.05}s both`,
                   }}>
                     <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, letterSpacing:1, color:e.rank===1?"#ffd700":e.rank===2?"#c0c0c0":e.rank===3?"#cd7f32":C.textMuted }}>
                       {e.rank<=3?["🥇","🥈","🥉"][e.rank-1]:`#${e.rank}`}
@@ -665,52 +679,181 @@ export default function GyMateDashboard() {
             </div>
           )}
 
-          {/* ════════ HISTORY ════════ */}
-          {tab==="history" && (
-            <div style={{ display:"flex", flexDirection:"column", gap:20, animation:"fadeUp 0.4s ease" }}>
-              <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:16, padding:"20px 26px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                <div>
+          {/* ════════ HISTORY — real data from backend ════════ */}
+          {tab==="history" && (()=>{
+            const byExercise = {};
+            PI_EXERCISES.forEach(ex => {
+              byExercise[ex] = sessionData
+                .filter(s => s.exercise === ex)
+                .sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp))
+                .map((s, i) => ({
+                  session:    `Session ${i + 1}`,
+                  time:       new Date(s.timestamp).toLocaleDateString("en-US",{month:"short",day:"numeric"}),
+                  good_reps:  s.good_reps,
+                  bad_reps:   s.bad_reps,
+                  total_sets: s.total_sets,
+                  total_reps: s.good_reps + s.bad_reps,
+                  good_pct:   s.good_reps + s.bad_reps > 0
+                    ? Math.round((s.good_reps / (s.good_reps + s.bad_reps)) * 100)
+                    : 0,
+                }));
+            });
+
+            const hasAnyData = PI_EXERCISES.some(ex => byExercise[ex].length > 0);
+
+            // Custom tooltip for the stacked chart
+            const HistoryTip = ({ active, payload, label }) => {
+              if (!active || !payload?.length) return null;
+              const good = payload.find(p => p.dataKey === "good_reps");
+              const bad  = payload.find(p => p.dataKey === "bad_reps");
+              const total = (good?.value || 0) + (bad?.value || 0);
+              const pct   = total > 0 ? Math.round((good?.value / total) * 100) : 0;
+              return (
+                <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:12, padding:"12px 16px", minWidth:140 }}>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textMuted, marginBottom:8 }}>{label}</div>
+                  <div style={{ display:"flex", flexDirection:"column", gap:5 }}>
+                    <div style={{ display:"flex", justifyContent:"space-between", gap:16 }}>
+                      <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:C.green }}>✓ Good reps</span>
+                      <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:16, color:C.green }}>{good?.value || 0}</span>
+                    </div>
+                    <div style={{ display:"flex", justifyContent:"space-between", gap:16 }}>
+                      <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:C.red }}>✗ Bad reps</span>
+                      <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:16, color:C.red }}>{bad?.value || 0}</span>
+                    </div>
+                    <div style={{ borderTop:`1px solid ${C.border}`, marginTop:4, paddingTop:6, display:"flex", justifyContent:"space-between" }}>
+                      <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:C.textMuted }}>Form score</span>
+                      <span style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:16, color:pct>=70?C.orange:C.red }}>{pct}%</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            };
+
+            return (
+              <div style={{ display:"flex", flexDirection:"column", gap:24, animation:"fadeUp 0.4s ease" }}>
+
+                {/* Header */}
+                <div style={{ background:C.card, border:`1px solid ${C.borderBright}`, borderRadius:16, padding:"20px 26px" }}>
                   <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:26, letterSpacing:2 }}>Session History</div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:1, marginTop:4 }}>38 SESSIONS · 7 DAY STREAK</div>
-                </div>
-                <div style={{ display:"flex", gap:10 }}>
-                  <StatBox label="Best Score" value="91" hi/>
-                  <StatBox label="Avg Score" value="81"/>
-                </div>
-              </div>
-
-              {mockHistory.map((s,i)=>(
-                <div key={i} className="row-h" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:"18px 22px", display:"flex", alignItems:"center", gap:18, cursor:"pointer", transition:"background 0.15s", animation:`fadeUp 0.3s ease ${i*0.07}s both` }}>
-                  <div style={{ width:46, height:46, borderRadius:12, background:C.orangeGlow, border:`1px solid ${C.orange}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:22, flexShrink:0 }}>🏋️</div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, letterSpacing:1 }}>{s.exercise}</div>
-                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textMuted, marginTop:3, letterSpacing:1 }}>{s.date} · {s.duration} · {s.reps} reps · {s.weight}</div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:1, marginTop:4 }}>
+                    {loadingSessions ? "LOADING FROM DATABASE..." : `${sessionData.length} SESSIONS RECORDED · ${USER_EMAIL}`}
                   </div>
-                  <div style={{ textAlign:"right" }}>
-                    <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:34, letterSpacing:2, color:s.score>=85?C.orange:s.score>=70?C.text:C.red, lineHeight:1 }}>{s.score}</div>
-                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:1 }}>EFFICIENCY</div>
-                  </div>
-                  <div style={{ color:C.textMuted, fontSize:18 }}>›</div>
                 </div>
-              ))}
 
-              <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 24px" }}>
-                <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>Weight Progression — Bench Press</div>
-                <ResponsiveContainer width="100%" height={160}>
-                  <LineChart data={[
-                    {s:"Feb 22",w:165},{s:"Feb 25",w:170},{s:"Feb 29",w:170},{s:"Mar 2",w:175},{s:"Mar 4",w:175},{s:"Mar 6",w:175},
-                  ]}>
-                    <XAxis dataKey="s" tick={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, fill:C.textMuted }} axisLine={false} tickLine={false}/>
-                    <YAxis hide domain={[155,185]}/>
-                    <Tooltip content={<Tip/>}/>
-                    <Line type="monotone" dataKey="w" stroke={C.orange} strokeWidth={2.5}
-                      dot={{ fill:C.orange, r:4, strokeWidth:0 }}
-                      activeDot={{ r:6, fill:C.orange, filter:`drop-shadow(0 0 4px ${C.orange})` }}/>
-                  </LineChart>
-                </ResponsiveContainer>
+                {loadingSessions && (
+                  <div style={{ textAlign:"center", padding:60, color:C.textMuted, fontFamily:"'JetBrains Mono',monospace", fontSize:11 }}>
+                    Fetching from backend...
+                  </div>
+                )}
+
+                {!loadingSessions && !hasAnyData && (
+                  <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:48, textAlign:"center" }}>
+                    <div style={{ fontSize:36, marginBottom:12 }}>🏋️</div>
+                    <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:22, letterSpacing:2, marginBottom:8 }}>No Sessions Yet</div>
+                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:C.textMuted }}>Complete a workout on the wristband to see your data here.</div>
+                  </div>
+                )}
+
+                {!loadingSessions && PI_EXERCISES.map(ex => {
+                  const data = byExercise[ex];
+                  if (data.length === 0) return null;
+
+                  const totalGood     = data.reduce((s,d) => s + d.good_reps,  0);
+                  const totalBad      = data.reduce((s,d) => s + d.bad_reps,   0);
+                  const totalSets     = data.reduce((s,d) => s + d.total_sets, 0);
+                  const totalReps     = totalGood + totalBad;
+                  const overallPct    = totalReps > 0 ? Math.round((totalGood / totalReps) * 100) : 0;
+                  const avgGoodPerSet = totalSets > 0 ? (totalGood / totalSets).toFixed(1) : "—";
+                  const avgBadPerSet  = totalSets > 0 ? (totalBad  / totalSets).toFixed(1) : "—";
+
+                  return (
+                    <div key={ex} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"24px 28px" }}>
+
+                      {/* Title + overall form score */}
+                      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20, flexWrap:"wrap", gap:12 }}>
+                        <div>
+                          <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:26, letterSpacing:2, color:C.orange }}>{ex}</div>
+                          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:1, marginTop:2 }}>
+                            {data.length} SESSION{data.length!==1?"S":""} · {totalReps} TOTAL REPS · {totalSets} SETS
+                          </div>
+                        </div>
+                        {/* Big form score circle */}
+                        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                          <div style={{ position:"relative", width:72, height:72 }}>
+                            <svg width="72" height="72" style={{ transform:"rotate(-90deg)" }}>
+                              <circle cx="36" cy="36" r="30" fill="none" stroke={C.border} strokeWidth="5"/>
+                              <circle cx="36" cy="36" r="30" fill="none"
+                                stroke={overallPct>=70?C.green:C.red} strokeWidth="5"
+                                strokeDasharray={`${(overallPct/100)*188} 188`} strokeLinecap="round"/>
+                            </svg>
+                            <div style={{ position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center" }}>
+                              <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:18, color:overallPct>=70?C.green:C.red, lineHeight:1 }}>{overallPct}%</div>
+                            </div>
+                          </div>
+                          <div>
+                            <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:13, letterSpacing:1, color:C.text }}>FORM SCORE</div>
+                            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, marginTop:2 }}>overall good rep %</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 4 stat pills */}
+                      <div style={{ display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:10, marginBottom:24 }}>
+                        {[
+                          { label:"Good Reps", value:totalGood, color:C.green, sub:"total" },
+                          { label:"Bad Reps",  value:totalBad,  color:C.red,   sub:"total" },
+                          { label:"Avg Good / Set", value:avgGoodPerSet, color:C.green, sub:"per set avg" },
+                          { label:"Avg Bad / Set",  value:avgBadPerSet,  color:C.red,   sub:"per set avg" },
+                        ].map(s => (
+                          <div key={s.label} style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:"14px 16px" }}>
+                            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:8, color:C.textMuted, letterSpacing:1, marginBottom:6 }}>{s.label.toUpperCase()}</div>
+                            <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:28, color:s.color, letterSpacing:1, lineHeight:1 }}>{s.value}</div>
+                            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:7, color:C.textDim, marginTop:4 }}>{s.sub}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Chart title */}
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.textMuted, letterSpacing:2, marginBottom:12 }}>
+                        GOOD vs BAD REPS PER SESSION
+                      </div>
+
+                      {/* Stacked bar chart — good reps on bottom, bad on top */}
+                      <ResponsiveContainer width="100%" height={200}>
+                        <BarChart data={data} barSize={data.length === 1 ? 60 : undefined} barCategoryGap="30%">
+                          <XAxis
+                            dataKey="time"
+                            tick={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, fill:C.textMuted }}
+                            axisLine={false} tickLine={false}
+                          />
+                          <YAxis
+                            tick={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, fill:C.textMuted }}
+                            axisLine={false} tickLine={false} width={24}
+                            label={{ value:"reps", angle:-90, position:"insideLeft", fill:C.textMuted, fontFamily:"'JetBrains Mono',monospace", fontSize:8, dy:20 }}
+                          />
+                          <Tooltip content={<HistoryTip/>} cursor={{ fill:"rgba(255,255,255,0.03)" }}/>
+                          <Bar dataKey="good_reps" name="Good Reps" stackId="a" fill={C.green} radius={[0,0,0,0]}/>
+                          <Bar dataKey="bad_reps"  name="Bad Reps"  stackId="a" fill={C.red}   radius={[4,4,0,0]}/>
+                        </BarChart>
+                      </ResponsiveContainer>
+
+                      {/* Legend */}
+                      <div style={{ display:"flex", gap:20, marginTop:10 }}>
+                        <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                          <div style={{ width:12, height:12, borderRadius:2, background:C.green }}/>
+                          <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:C.textMuted }}>Good reps — correct form &amp; timing</span>
+                        </div>
+                        <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                          <div style={{ width:12, height:12, borderRadius:2, background:C.red }}/>
+                          <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, color:C.textMuted }}>Bad reps — too fast or too slow</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          )}
+            );
+          })()}
 
         </div>
 
@@ -726,3 +869,4 @@ export default function GyMateDashboard() {
     </>
   );
 }
+
